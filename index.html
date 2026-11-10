@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New India Assurance (NIA) - Revised OD Discount Advisor Portal</title>
+  <meta name="description"
+    content="Instant underwriting lookup and quotation tool for Revised Own Damage (OD) discounts for New India Assurance advisors and agents.">
+  <meta name="theme-color" content="#0284c7">
+
+  <!-- Preconnect and Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Regulatory Strip Banner -->
+  <div class="regulatory-strip">
+    <div class="strip-item">
+      <span class="strip-badge">INTERNAL ADVISOR PORTAL</span>
+      <span>The New India Assurance Co. Ltd. • Motor Underwriting Guidelines</span>
+    </div>
+    <div class="strip-item">
+      <span>Official Revised OD Discount Matrix</span>
+      <span style="opacity: 0.7;">•</span>
+      <span id="current-date-badge" style="font-weight: 500;">Valid for FY 2024-25 / 2025-26</span>
+    </div>
+  </div>
+
+  <!-- Corporate Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-logo-wrap" aria-hidden="true">
+          <!-- Corporate Shield & Wheel Icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <circle cx="12" cy="11" r="3" />
+            <path d="m9.5 8.5 5 5" />
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <div class="company-name">
+            New India Assurance
+            <span class="company-abbr">NIA</span>
+          </div>
+          <div class="portal-tagline">Revised OD Discount Master & Premium Calculator</div>
+        </div>
+      </div>
+
+      <!-- View Switcher Navigation -->
+      <nav class="header-nav" role="tablist" aria-label="Portal Views">
+        <button type="button" class="nav-tab-btn active" id="tab-calculator" role="tab" aria-selected="true"
+          aria-controls="view-calculator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect width="16" height="20" x="4" y="2" rx="2" />
+            <line x1="8" x2="16" y1="6" y2="6" />
+            <line x1="16" x2="16" y1="14" y2="18" />
+            <path d="M8 10h.01" />
+            <path d="M12 10h.01" />
+            <path d="M16 10h.01" />
+            <path d="M8 14h.01" />
+            <path d="M12 14h.01" />
+            <path d="M8 18h.01" />
+            <path d="M12 18h.01" />
+          </svg>
+          Quick Finder
+        </button>
+
+        <button type="button" class="nav-tab-btn" id="tab-matrix" role="tab" aria-selected="false"
+          aria-controls="view-matrix">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" />
+            <path d="M3 9h18" />
+            <path d="M3 15h18" />
+            <path d="M9 3v18" />
+            <path d="M15 3v18" />
+          </svg>
+          Rate Chart Matrix
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-wrapper">
+
+    <!-- Overview Banner -->
+    <section class="page-intro-card">
+      <div class="intro-content">
+        <h1>Revised Own Damage (OD) Discount Lookup</h1>
+        <p>Instant motor underwriting discount finder for Private Cars, Commercial Vehicles (GCV), SAOD, and Two
+          Wheelers.</p>
+      </div>
+      <div class="intro-stats-group">
+        <div class="stat-pill">
+          <span class="stat-val">Up to 90%</span>
+          <span class="stat-lbl">Max OD Discount</span>
+        </div>
+        <div class="stat-pill" style="display: none;" id="desktop-stat-pill">
+          <span class="stat-val">5</span>
+          <span class="stat-lbl">Categories Covered</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 1: QUICK CALCULATOR / FINDER
+         ==================================================================== -->
+    <section id="view-calculator" class="view-panel active" role="tabpanel" aria-labelledby="tab-calculator">
+      <div class="calculator-layout">
+
+        <!-- Left Column: Input Selection Controls -->
+        <div class="calculator-controls-col">
+          <div class="app-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="step-indicator">1</span>
+                <div>
+                  <h2 class="card-title">Select Vehicle Category</h2>
+                  <p class="card-subtitle">Choose the vehicle class to display underwriting criteria</p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline" id="btn-reset-inputs" title="Reset all selections"
+                style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                  <path d="M3 3v5h5" />
+                </svg>
+                Reset
+              </button>
+            </div>
+
+            <div class="card-body">
+              <!-- Category Selector Pills Grid -->
+              <div class="category-selector-section">
+                <div class="section-label">
+                  <span>Step 1: Vehicle Category</span>
+                  <span style="font-size: 0.75rem; color: var(--text-subtle);">Tap to switch</span>
+                </div>
+                <div class="category-pills-grid" id="category-pills" role="radiogroup" aria-label="Vehicle Categories">
+                  <!-- Populated by JavaScript -->
+                </div>
+              </div>
+
+              <!-- Contextual Category Info Description -->
+              <div class="category-info-alert" id="category-description">
+                <!-- Dynamically updated -->
+              </div>
+
+              <!-- Dynamic Form Area (Renders Age / Add-on / NCB / Renewal) -->
+              <div class="dynamic-form-area" id="dynamic-inputs-area">
+                <!-- Populated dynamically based on category selection -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional Advisor Bonus: OD Premium Estimator Accordion -->
+          <div class="premium-calc-container" id="premium-calc-container">
+            <button type="button" class="calc-accordion-trigger" id="calc-accordion-trigger" aria-expanded="false">
+              <div class="calc-trigger-title">
+                <!-- Calculator Icon -->
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                  <line x1="12" x2="12" y1="2" y2="22" />
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+                <span>Quick OD Premium Estimator (Optional)</span>
+                <span class="calc-trigger-badge">Live Calculator</span>
+              </div>
+              <svg class="calc-accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+
+            <div class="calc-accordion-content">
+              <div class="calc-inputs-grid">
+                <div class="calc-field-group">
+                  <label class="field-label" for="input-basic-od">Basic Tariff OD Premium</label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="input-basic-od" class="calc-input" value="10000" min="0" step="500"
+                      placeholder="e.g. 10000">
+                  </div>
+                </div>
+
+                <div class="calc-field-group">
+                  <label class="field-label" for="select-ncb-percent">NCB Bonus on OD</label>
+                  <select id="select-ncb-percent" class="calc-select">
+                    <option value="0">0% (Nil / First Year / Claimed)</option>
+                    <option value="20" selected>20% (1 Claim-Free Year)</option>
+                    <option value="25">25% (2 Claim-Free Years)</option>
+                    <option value="35">35% (3 Claim-Free Years)</option>
+                    <option value="45">45% (4 Claim-Free Years)</option>
+                    <option value="50">50% (5+ Claim-Free Years - Max)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Breakdown Card -->
+              <div class="calc-results-card">
+                <div class="calc-output-row">
+                  <span>Basic Tariff OD Premium</span>
+                  <span id="out-basic-od" style="font-weight: 600;">₹10,000</span>
+                </div>
+                <div class="calc-output-row" style="color: var(--primary-blue-dark);">
+                  <span>Revised OD Discount <strong id="out-discount-percent">(85%)</strong></span>
+                  <span id="out-discount-amount" style="font-weight: 700;">- ₹8,500</span>
+                </div>
+                <div class="calc-output-row highlight-od">
+                  <span>OD Premium After Discount</span>
+                  <span id="out-od-after-discount">₹1,500</span>
+                </div>
+                <div class="calc-output-row" style="color: var(--accent-teal);">
+                  <span>Less: No Claim Bonus (NCB)</span>
+                  <span id="out-ncb-amount" style="font-weight: 600;">- ₹300</span>
+                </div>
+                <div class="calc-output-row">
+                  <span>Add: GST @ 18%</span>
+                  <span id="out-gst-amount" style="font-weight: 600;">+ ₹216</span>
+                </div>
+                <div class="calc-output-row total-row">
+                  <span>Net OD Premium Payable</span>
+                  <span id="out-final-od-payable" style="color: var(--primary-blue-dark);">₹1,416</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Prominent Result Card & Actions -->
+        <div class="calculator-result-col">
+          <div class="app-card result-sticky-card">
+            <div class="card-header" style="background: #fafafa;">
+              <div class="card-title-group">
+                <span class="step-indicator"
+                  style="background: var(--accent-teal-light); color: var(--accent-teal-dark);">★</span>
+                <div>
+                  <h2 class="card-title">Approved Revised Discount</h2>
+                  <p class="card-subtitle">Calculated as per latest underwriting circular</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <!-- Hero Highlight Box -->
+              <div class="result-hero-box">
+                <div class="result-stamp">
+                  <!-- Checkmark icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>NIA Approved OD Rate</span>
+                </div>
+
+                <div class="result-percentage-wrapper">
+                  <span class="result-percentage" id="result-percentage">85</span>
+                  <span class="result-percent-sign">%</span>
+                </div>
+
+                <div class="result-label">Revised OD Discount</div>
+                <div class="result-sublabel" id="result-sublabel">Comprehensive with Nil Dep/Add-ons</div>
+
+                <!-- Visual Meter Bar -->
+                <div class="discount-meter-wrap">
+                  <div class="meter-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                    <div class="meter-fill" id="meter-fill" style="width: 85%;"></div>
+                  </div>
+                  <div class="meter-scale">
+                    <span>50%</span>
+                    <span>65%</span>
+                    <span>75%</span>
+                    <span>85%</span>
+                    <span>90% Max</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Parameter Breakdown List -->
+              <div class="quote-parameters-list">
+                <div class="param-row">
+                  <span class="param-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="14" x="2" y="5" rx="2" />
+                      <line x1="2" x2="22" y1="10" y2="10" />
+                    </svg>
+                    Vehicle Category
+                  </span>
+                  <span class="param-value" id="param-category">Private Car</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    Vehicle Age Bracket
+                  </span>
+                  <span class="param-value" id="param-age">Up to 7 years</span>
+                </div>
+                <div class="param-row">
+                  <span class="param-label">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Cover / Criteria
+                  </span>
+                  <span class="param-value" id="param-condition">With Add-on Cover</span>
+                </div>
+                <div class="param-row" style="background: #f8fafc;">
+                  <span class="param-label" style="font-weight: 700; color: var(--brand-navy);">
+                    Effective OD Discount
+                  </span>
+                  <span class="param-value" id="param-discount"
+                    style="font-size: 1.1rem; color: var(--primary-blue-dark); font-weight: 800;">85%</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="result-actions-group">
+                <button type="button" class="btn btn-primary" id="btn-copy-quote"
+                  title="Copy quote summary for clipboard">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                  </svg>
+                  Copy Quote Summary
+                </button>
+
+                <div class="btn-group-dual">
+                  <button type="button" class="btn btn-whatsapp" id="btn-share-whatsapp"
+                    title="Share directly on WhatsApp">
+                    <!-- WhatsApp SVG Icon -->
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.276-.1-.477-.15-.678.15-.2.301-.778.98-.954 1.18-.175.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.895-.798-1.5-1.784-1.675-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.175.2-.301.301-.502.1-.2.05-.376-.025-.527-.075-.15-.678-1.634-.929-2.238-.245-.588-.493-.509-.678-.518l-.578-.01c-.2 0-.527.075-.803.376s-1.054 1.03-1.054 2.511 1.079 2.912 1.23 3.113c.15.2 2.122 3.24 5.141 4.544.718.31 1.278.495 1.716.634.722.23 1.379.197 1.899.12.579-.086 1.78-.727 2.03-1.43.25-.704.25-1.307.175-1.431-.075-.124-.276-.2-.577-.35z" />
+                      <path
+                        d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.17L2 22l4.982-1.39A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.2a8.16 8.16 0 0 1-4.32-1.229l-.31-.184-2.96.825.835-2.883-.2-.319A8.165 8.165 0 0 1 3.8 12c0-4.522 3.678-8.2 8.2-8.2s8.2 3.678 8.2 8.2-3.678 8.2-8.2 8.2z" />
+                    </svg>
+                    WhatsApp
+                  </button>
+
+                  <button type="button" class="btn btn-outline" id="btn-print-slip" title="View printable quote slip">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <polyline points="6 9 6 2 18 2 18 9" />
+                      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                      <rect width="12" height="8" x="6" y="14" />
+                    </svg>
+                    Quote Slip
+                  </button>
+                </div>
+              </div>
+
+              <!-- Underwriting Note -->
+              <div class="result-underwriting-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  style="flex-shrink: 0; color: var(--accent-teal); margin-top: 0.1rem;">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <path d="M12 8h.01" />
+                </svg>
+                <span id="underwriting-note-text">For vehicles older than 10 years, discount remains identical (80% or
+                  78%) with or without add-on cover.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: RATE CHART MATRIX TABLE
+         ==================================================================== -->
+    <section id="view-matrix" class="view-panel" role="tabpanel" aria-labelledby="tab-matrix">
+      <!-- Search and Filter Controls -->
+      <div class="matrix-controls-bar">
+        <!-- Filter Tabs -->
+        <div class="matrix-filter-pills" role="radiogroup" aria-label="Filter Matrix Categories">
+          <button type="button" class="matrix-filter-btn active" data-filter="all">All Vehicles</button>
+          <button type="button" class="matrix-filter-btn" data-filter="private_car">Private Car</button>
+          <button type="button" class="matrix-filter-btn" data-filter="saod_private_car">SAOD Private Car</button>
+          <button type="button" class="matrix-filter-btn" data-filter="two_wheeler_new">Two Wheeler (New)</button>
+          <button type="button" class="matrix-filter-btn" data-filter="gcv_7_5_to_40">GCV (7.5T-40T)</button>
+          <button type="button" class="matrix-filter-btn" data-filter="gcv_above_40">GCV (>40T)</button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="matrix-search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input type="text" id="matrix-search-input" class="matrix-search-input"
+            placeholder="Search age, add-on, rate...">
+        </div>
+      </div>
+
+      <!-- Reference Rate Table -->
+      <div class="table-responsive-container">
+        <table class="rate-chart-table">
+          <thead>
+            <tr>
+              <th>Vehicle Category & Description</th>
+              <th>Vehicle Age</th>
+              <th>Condition / Scope</th>
+              <th>Revised OD Discount</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="matrix-table-body">
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-subtle);">
+        <span id="matrix-row-count">Showing all rates</span>
+        <span>Click any row or button to load directly into Quick Finder</span>
+      </div>
+    </section>
+
+    <!-- Underwriting Rules Reference Notes Grid -->
+    <section class="underwriting-notes-grid">
+      <div class="note-box">
+        <div class="note-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.1 2 11.5 2 12v4c0 .6.4 1 1 1h2" />
+            <circle cx="7" cy="17" r="2" />
+            <path d="M9 17h6" />
+            <circle cx="17" cy="17" r="2" />
+          </svg>
+          <h3 class="note-title">Private Car Parity Note</h3>
+        </div>
+        <p class="note-desc">
+          For private cars and GCV (7.5T-40T) older than 10 years, the revised OD discount remains identical whether the
+          client opts for Add-on covers or standard cover (80% / 78% for cars, 75% / 70% for commercial).
+        </p>
+      </div>
+
+      <div class="note-box">
+        <div class="note-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect width="20" height="12" x="2" y="6" rx="2" />
+            <path d="M12 18v4" />
+            <circle cx="7" cy="12" r="1.5" />
+            <circle cx="17" cy="12" r="1.5" />
+          </svg>
+          <h3 class="note-title">Heavy Commercial (>40T) Renewal</h3>
+        </div>
+        <p class="note-desc">
+          GCV (>40,000 GVW) renewals carry an exclusive loyalty differential: Existing NIA policyholders receive 5% to
+          10% higher discount compared to other company rollovers across all vehicle age brackets.
+        </p>
+      </div>
+
+      <div class="note-box">
+        <div class="note-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          <h3 class="note-title">SAOD Compliance</h3>
+        </div>
+        <p class="note-desc">
+          Standalone OD (SAOD) can only be underwritten when a valid long-term Third Party (TP) policy is active.
+          Claim-free expiring records qualify for 82% OD discount; otherwise 78% applies.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Quote Slip Print Modal -->
+  <div class="modal-overlay" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="slip-modal-title">
+    <div class="quote-slip-card">
+      <div class="quote-slip-header">
+        <div>
+          <div class="strip-badge"
+            style="background: rgba(255,255,255,0.25); color: #ffffff; border: none; margin-bottom: 0.35rem;">OFFICIAL
+            QUOTATION MEMO</div>
+          <h3 class="slip-title" id="slip-modal-title">New India Assurance</h3>
+          <div style="font-size: 0.8rem; opacity: 0.9;">Revised OD Discount Confirmation</div>
+        </div>
+        <button type="button" class="slip-close-btn" id="modal-close-btn" aria-label="Close modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" x2="6" y1="6" y2="18" />
+            <line x1="6" x2="18" y1="6" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="quote-slip-body">
+        <div class="slip-banner">
+          <div
+            style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-subtle); font-weight: 700;">
+            Approved OD Discount Rate</div>
+          <div class="slip-discount-val" id="modal-discount-val">85%</div>
+          <div style="font-size: 0.82rem; color: var(--accent-teal); font-weight: 600;">Valid Under Current NIA
+            Underwriting Guidelines</div>
+        </div>
+
+        <div class="quote-parameters-list" style="margin-bottom: 1.25rem;">
+          <div class="param-row">
+            <span class="param-label">Vehicle Category</span>
+            <span class="param-value" id="modal-category">Private Car</span>
+          </div>
+          <div class="param-row">
+            <span class="param-label">Vehicle Age</span>
+            <span class="param-value" id="modal-age">Up to 7 years</span>
+          </div>
+          <div class="param-row">
+            <span class="param-label">Cover / Selection</span>
+            <span class="param-value" id="modal-condition">With Add-on Cover</span>
+          </div>
+          <div class="param-row">
+            <span class="param-label">Generated Date</span>
+            <span class="param-value" id="modal-date">-</span>
+          </div>
+        </div>
+
+        <div
+          style="font-size: 0.72rem; color: var(--text-subtle); line-height: 1.4; border-top: 1px dashed var(--border-medium); padding-top: 0.75rem; margin-bottom: 1rem;">
+          * Note: This slip confirms approved Own Damage (OD) discount rates on tariff OD premium. Applicable taxes, NCB
+          bonus, and compulsory Third Party (TP) premium shall be calculated additionally as per policy schedule.
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn-primary" id="modal-print-btn" style="flex: 1;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9" />
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <rect width="12" height="8" x="6" y="14" />
+            </svg>
+            Print / Save as PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div>
+        <strong>The New India Assurance Co. Ltd.</strong> • India's Premier Multinational General Insurance Company
+      </div>
+      <div>
+        Motor Underwriting Support • Revised OD Discount Reference Portal
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
